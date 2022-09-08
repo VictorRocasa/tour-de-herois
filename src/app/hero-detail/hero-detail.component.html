@@ -2,12 +2,12 @@
 
     <h2>{{hero.nome | uppercase}} Details</h2>
     <div><span>id: </span>{{hero.id}}</div>
-    <div>
-      <label for="hero-name">Nome do herói: </label>
-      <input id="hero-name" [(ngModel)]="hero.nome" placeholder="Nome">
-      <br>
-      <button type="button" (click)="goBack()">go back</button>
-      <button type="button" (click)="save()">save</button>
-    </div>
-  
+    
+      <div>
+        <label for="hero-name">Nome do herói: </label>
+        <input id="hero-name" [(ngModel)]="hero.nome" placeholder="Nome">
+      </div>
+
+      <button type="button" (click)="goBack()">Voltar</button>
+      <button type="button" (click)="save()">Salvar</button>
   </div>

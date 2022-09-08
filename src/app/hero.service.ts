@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
-import { Observable, of } from 'rxjs';
-import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+
+import { Hero } from './hero';
+import { MessageService } from './message.service';
 
 
 
@@ -90,6 +91,20 @@ deleteHero(id: number): Observable<Hero> {
   return this.http.delete<Hero>(url, this.httpOptions).pipe(
     tap(_ => this.log(`deleted hero id=${id}`)),
     catchError(this.handleError<Hero>('deleteHero'))
+  );
+}
+
+/* GET heroes whose name contains search term */
+searchHeroes(term: string): Observable<Hero[]> {
+  if (!term.trim()) {
+    // if not search term, return empty hero array.
+    return of([]);
+  }
+  return this.http.get<Hero[]>(`${this.heroesUrl}/?nome=${term}`).pipe(
+    tap(x => x.length ?
+       this.log(`A pesquisa por "${term}" encontrou heróis`) :
+       this.log(`Nenhum herói encontrado ao pesquisar "${term}"`)),
+    catchError(this.handleError<Hero[]>('searchHeroes', []))
   );
 }
   
