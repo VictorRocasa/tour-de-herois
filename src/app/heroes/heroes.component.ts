@@ -11,11 +11,6 @@ export class HeroesComponent implements OnInit {
 
   heroes = HEROES;
 
-  hero: Hero = {
-    id:1,
-    nome:'Ventania'
-  };
-
   constructor() { }
 
   ngOnInit(): void {
